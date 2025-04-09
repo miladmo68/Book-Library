@@ -45,6 +45,7 @@ export const BookProvider = ({ children }) => {
   const [books, setBooks] = useState(defaultBooks);
   const [search, setSearch] = useState("");
   const [favorite, setfavorite] = useState([]);
+  const [readToggle, setReadToggle] = useState("Read");
 
   function onRemove(id) {
     setBooks(books.filter((book) => book.id !== id));
@@ -57,10 +58,17 @@ export const BookProvider = ({ children }) => {
   function onRemoveFav(id) {
     setfavorite(favorite.filter((fav) => fav.id !== id));
   }
-  console.log(search);
-  // function onSearch() {
-  //   console.log();
-  // }
+  // console.log(search);
+
+  function onRead(id) {
+    setBooks(
+      books.map((book) =>
+        book.id === id
+          ? { ...book, status: book.status === "Read" ? "Unread" : "Read" }
+          : book
+      )
+    );
+  }
   return (
     <BookContext.Provider
       value={{
@@ -72,6 +80,9 @@ export const BookProvider = ({ children }) => {
         onRemoveFav,
         search,
         setSearch,
+        readToggle,
+        setReadToggle,
+        onRead,
       }}
     >
       {children}

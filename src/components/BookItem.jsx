@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { BookContext } from "../context/BookContext";
 
 const BookItem = ({ book }) => {
-  const { onRemove, onFavorite, favorite, onRemoveFav } =
+  const { onRemove, onFavorite, favorite, onRemoveFav, onRead, readToggle } =
     useContext(BookContext);
   return (
     <li className="bg-white shadow-md rounded-2xl w-full max-w-sm p-6 flex flex-col items-start hover:shadow-lg transition-shadow duration-300 cursor-pointer">
@@ -17,7 +17,7 @@ const BookItem = ({ book }) => {
             : "bg-yellow-100 text-yellow-800"
         }`}
       >
-        {book.status}
+        <div onClick={() => onRead(book.id)}>{book.status}</div>
       </span>
 
       <div className="flex w-full  mt-6 justify-between ">
